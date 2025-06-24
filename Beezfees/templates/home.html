@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% load humanize %} 
+{% block pageContent %}
+
+
+
+{% for group in user.groups.all %}
+    {% if group.name == 'director' or group.name == 'admin' %}
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet">
+    <a class="text-dark" href="{% url 'Beezfees:invoiced_list' %}">
+    <div class="mdc-card info-card info-card--success">
+        <div class="card-inner">
+            <h5 class="card-title"><strong>Revenue</strong></h5>
+            <h5 class="font-weight-light pb-2 mb-1 border-bottom"><strong>${{inv_amount}}</strong></h5>
+            <p class="tx-12 text-muted">BeezFeez:Expected Revenue Total</p>
+            <div class="card-icon-wrapper">
+                <i class="material-icons">list</i>
+            </div>
+        </div>
+
+     </div>
+    </a>
+</div>
+{%endif%}
+{%endfor%}
+
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet">
+    <a class="text-dark" href="{% url 'Beezfees:debtors' %}">
+    <div class="mdc-card info-card info-card--success">
+        <div class="card-inner">
+            <h5 class="card-title"><strong>Debtors</strong></h5>
+            <h5 class="font-weight-light pb-2 mb-1 border-bottom"><strong>${{  debtors}}</strong></h5>
+            <p class="tx-12 text-muted">BeezFeez:Expected Debtors Total</p>
+            <div class="card-icon-wrapper">
+                <i class="material-icons">list</i>
+            </div>
+        </div>
+
+     </div>
+    </a>
+</div>
+
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet">
+    <a class="text-dark" href="{% url 'Beezfees:customer_list' %}">
+    <div class="mdc-card info-card info-card--success">
+        <div class="card-inner">
+            <h5 class="card-title"><strong>Customers</strong></h5>
+            <h5 class="font-weight-light pb-2 mb-1 border-bottom"><strong>{{ student_enrolment }}</strong></h5>
+            <p class="tx-12 text-muted">BeezFeez:Customer Total count</p>
+            <div class="card-icon-wrapper">
+                <i class="material-icons">people</i>
+            </div>
+        </div>
+
+     </div>
+    </a>
+</div>
+
+
+{% for group in user.groups.all %}
+    {% if  group.name == 'admin' or group.name == 'bursar' %}
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet">
+    <a class="text-dark" href="{% url 'Beezfees:statements' %}">
+    <div class="mdc-card info-card info-card--success">
+        <div class="card-inner">
+            <h5 class="card-title"><strong>Statements</strong></h5>
+            <h5 class="font-weight-light pb-2 mb-1 border-bottom"><strong></strong></h5>
+            <p class="tx-12 text-muted">BeezFeez:All Statements</p>
+            <div class="card-icon-wrapper">
+                <i class="material-icons">list</i>
+            </div>
+        </div>
+
+     </div>
+    </a>
+</div>
+
+
+{%endif%}
+{%endfor%}
+
+
+
+
+
+{% for group in user.groups.all %}
+    {% if group.name == 'bursar' or group.name == 'admin' %}
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet">
+    <a class="text-dark" href="{% url 'Beezfees:currency_list' %}">
+    <div class="mdc-card info-card info-card--success">
+        <div class="card-inner">
+            <h5 class="card-title"><strong>Currency</strong></h5>
+            <h5 class="font-weight-light pb-2 mb-1 border-bottom"><strong>{{currency}}</strong></h5>
+            <p class="tx-12 text-muted">BeezFeez:Active Currency</p>
+            <div class="card-icon-wrapper">
+                <i class="material-icons">payment</i>
+            </div>
+        </div>
+
+     </div>
+    </a>
+</div>
+{%endif%}
+{%endfor%}
+
+
+{% for group in user.groups.all %}
+    {% if group.name == 'director' or group.name == 'admin' %}
+
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet">
+    <a class="text-dark" href="{% url 'Beezfees:statements' %}">
+    <div class="mdc-card info-card info-card--success">
+        <div class="card-inner">
+            <h5 class="card-title"><strong>Reports</strong></h5>
+            <h5 class="font-weight-light pb-2 mb-1 border-bottom"><strong>{{ cur }}</strong></h5>
+            <p class="tx-12 text-muted">BeezFeez:All Reports</p>
+            <div class="card-icon-wrapper">
+                <i class="material-icons">list</i>
+            </div>
+        </div>
+
+     </div>
+    </a>
+</div>
+
+
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet">
+    <a class="text-dark" href="{% url 'Beezfees:statements' %}">
+    </a>
+    <div class="mdc-card info-card info-card--success">
+        <div class="card-inner">
+            <h5 class="card-title"><strong><u>Projections</u></strong></h5>
+            <a class="text-dark" href="{% url 'Beezfees:invoiced_list' %}">
+            <h5 class="font-weight-light pb-2 mb-1 border-bottom"><strong>Projected ${{inv_amount}}</strong></h5>
+        </a>
+                         VS
+        <a class="text-dark" href="{% url 'Beezfees:remmittance_list' %}">
+            <h5 class="font-weight-light pb-2 mb-1 border-bottom"><strong>Actual ${{projections}}</strong></h5>
+        </a>
+            <p class="tx-12 text-muted"></p>
+            <div class="card-icon-wrapper">
+                <i class="material-icons ">list</i>
+            </div>
+        </div>
+
+     </div>
+    </a>
+</div>
+
+{%endif%}
+{%endfor%}
+<!--<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet">
+    <a class="text-dark" href="{% url 'Beezfees:home' %}">
+        <div class="mdc-card info-card info-card--info">
+            <div class="card-inner">
+                <h5 class="card-title"><strong>Notifications</strong></h5>
+                <h5 class="font-weight-light pb-2 mb-1 border-bottom"></h5>
+                <div class="card-icon-wrapper">
+                    <i class="material-icons">list</i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<!--<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet">
+    <a class="text-dark" href="{% url 'Beezfees:home' %}">
+        <div class="mdc-card info-card info-card--info">
+            <div class="card-inner">
+                <h5 class="card-title"><strong>Prepayments</strong></h5>
+                <h5 class="font-weight-light pb-2 mb-1 border-bottom"></h5>
+                <div class="card-icon-wrapper">
+                    <i class="material-icons">list</i>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>-->
+
+{% endblock pageContent %}
+
+
+

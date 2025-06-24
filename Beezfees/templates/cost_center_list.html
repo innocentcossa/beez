@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block pageContent %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@11.0.0/dist/material-components-web.min.css">
+
+
+
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Revenue Group List</h4>
+
+            <div class="text-start">
+                <button class="btn btn-primary bg-gradient btn-sm rounded-0" id="create_new"><i class="mdi mdi-plus"></i><span> Add New</span></button>
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example">
+                <colgroup>
+                    <col width="20%">
+                    <col width="40%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="40%">
+                    <col width="20%">
+                    
+
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center py-1">Group code</th>
+                        <th class="text-center py-1">Group Name</th>
+                     
+                        
+                
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cost_center in cost_centre_list %}
+                    <tr>
+                        <td class="px-2 py-1 text-center">{{ cost_center.col_centre_code }}</td>
+                        <td class="px-2 py-1 text-center">{{ cost_center.col_centre_name }}</td>
+                    </div>
+                    
+                        <td class="px-2 py-1 text-center">
+                            <button class="mdc-button mdc-button--raised p-1 icon-button filled-button--light mdc-ripple-upgraded edit-data" type="button" data-id="" title="Edit">
+                                <i class="material-icons mdc-button__icon">edit</i>
+                            </button>
+                            <button class="mdc-button mdc-button--raised p-1 icon-button filled-button--danger mdc-ripple-upgraded delete-data" type="button" data-id="" title="Delete">
+                                <i class="material-icons mdc-button__icon">deleteoutline</i>
+                            </button>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock pageContent %}

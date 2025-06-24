@@ -1,0 +1,359 @@
+{% load static %}
+
+<aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open bg-dark bg-gradient">
+    <div class="mdc-drawer__header border-bottom border-light">
+        <a href="{% url 'Beezfees:home' %}" class="brand-logo">
+            <h3 class="text-center text-light">BeezFeez</h3>
+        </a>
+    </div>
+    <div class="mdc-drawer__content">
+        <div class="mdc-list-group">
+        <nav class="mdc-list mdc-drawer-menu">
+            <div class="mdc-list-item mdc-drawer-item">
+                <a class="mdc-drawer-link" href="{% url 'Beezfees:home' %}">
+                    <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="false">home</i> Dashboard
+                </a>
+            </div>
+       
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">settings</i>
+                                 <div class="text-light">System Configuration</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                <a href="{%url 'Beezfees:add_school'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Attendance Register">
+                                    School Details
+                                </li>
+                            </a>
+
+                                <a href="{%url 'Beezfees:session'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Attendance summary">
+                                    Session
+                                </li></a>
+                                <a href="{%url 'Beezfees:ordinance'%}">
+                                    <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    Ordinance
+                                </li></a>
+                                
+                                 <a href="{%url 'Beezfees:currency'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Attendance Register">
+                                   Currency
+                                </li></a>
+                                <a href="{%url 'Beezfees:save_levels'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Attendance Register">
+                                    Grades & Classes
+                                </li></a>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Revenue Components</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                              <!--  <li class="mdc-list-item" role="menuitem" title="Attendance Register">
+                                    <a href="{%url 'Beezfees:accounting_period'%}">Accounting Periods</a>
+                                </li>--><a href="{%url 'Beezfees:revenue_objects'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Attendance summary">
+                                    Revenue Objects
+                                </li></a>
+                                <a href="{%url 'Beezfees:revenue_group'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    Revenue Groups
+                                </li>
+                            </a>
+                            <a href="{%url 'Beezfees:revenue_structure'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    Revenue Structures
+                                </li></a>
+                                <!--  <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    <a href="{%url 'Beezfees:chat_of_accounts'%}">Chart of Accounts</a>
+                                </li>
+                                <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    <a href="{%url 'Beezfees:cost_centres'%}">Cost Centres</a>
+                                </li>-->
+    
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Money</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                <a href="{%url 'Beezfees:exchange_rates'%}">
+                                  <li class="mdc-list-item" role="menuitem" title="Attendance summary">
+                                    Exchange Rate Mgt
+                                </li>
+                            </a>
+                            <a href="{%url 'Beezfees:payment_methods'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    Payment Methods
+                                </li></a>
+                                {% comment %} <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    <a href="{%url 'admin:index'%}">Users</a>
+                                </li> {% endcomment %}
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">people</i>
+                                 <div class="text-light">Customers</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+                                
+                                <a href="{%url 'Beezfees:upload_customer'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Upload Customer
+                                </li></a>
+                                   <a href="{%url 'Beezfees:accounts'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Accounts
+                                </li></a>
+                                <a href="{%url 'Beezfees:group'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Assign Fees Group
+                                </li></a>
+                                <a href="{%url 'Beezfees:register'%}"><li class="mdc-list-item" role="menuitem" title="">
+                                    Customer Registration
+                                </li></a>
+                                <a href="{%url 'Beezfees:progress_class'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Progression
+                                </li></a>
+                                <a href="{%url 'Beezfees:registration_list'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Registration List
+                                </li></a>
+                                
+                                
+                                
+
+                                
+                               <!-- <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="{%url 'Beezfees:customer_list'%}">Customer List</a>
+                                </li>-->
+                                
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Billing</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+                                  <a href="{%url 'Beezfees:save_invoice'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Attendance summary">
+                                    Invoice
+                                </li></a>
+                                <a href="{%url 'Beezfees:assign_revenue'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Bill Single Service
+                                </li></a>
+                                
+{% for group in user.groups.all %}
+{% if group.name == 'deputy admin' or group.name == 'admin' %} 
+                                <a href="{%url 'Beezfees:adjustments'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Adjustments
+                                </li></a>
+                                {%endif%}
+{%endfor%}
+                                <a href="{%url 'Beezfees:invoiced_list'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    Invoiced customer list
+                                </li></a>
+                               <!-- <li class="mdc-list-item" role="menuitem" title="Temporary Pass">
+                                    <a href="{%url 'Beezfees:bulk_invoices'%}">Bulk invoices</a>
+                                </li>-->
+                                    
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Account Management</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+                                <a href="{%url 'Beezfees:upload_balances'%}">
+                                <li class="mdc-list-item" role="menuitem" title="Attendance Register">
+                                   Opening balances 
+                                </li></a>
+                                <a href="{%url 'Beezfees:account_balances'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                   Closing balances
+                                </li> </a>
+                                   
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Remittances</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+                                
+                                <a href="{%url 'Beezfees:save_remittances'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Remittances 
+                                </li></a>
+                                <a href="{%url 'Beezfees:save_remmittances'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Receipting Accounts
+                                </li></a>
+                                {% for group in user.groups.all %}
+{% if group.name == 'deputy admin' or group.name == 'admin' %}
+                                  <a href="{%url 'Beezfees:receipting_adjustments'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                  Adjustments
+                                </li> </a>
+                                {%endif%}
+                                {%endfor%}
+    
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Notifications</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+                                <a href="{%url 'Beezfees:remmittance_list'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Receipts
+                                </li>            </a>
+                            </ul>
+                        </div>
+                    </div>
+
+                        
+                    {% for group in user.groups.all %}
+                    {% if group.name == 'director' or group.name == 'admin' %}
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Reports</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                <a href="{%url 'Beezfees:statements'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Fees Statements
+                                </li></a>
+
+                                <a href="{%url 'Beezfees:sales_report'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Sales Report
+                                </li></a>
+
+                                <a href="{%url 'Beezfees:debtors'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Debtors Report
+                                </li></a>
+
+                                <a href="{%url 'Beezfees:age_analysis'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    Age Analysis
+                                </li></a>
+                                 <a href="{%url 'Beezfees:account_balances'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                   Customers Balances Report
+                                </li></a>
+                                <!--<li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="{%url 'Beezfees:account_balances'%}">Customer Prepayments</a>
+                                </li>-->
+    
+                            </ul>
+                        </div>
+                    </div>
+                    {%endif%}
+{%endfor%}
+                    
+
+
+
+
+
+                   <!-- <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Payment Plan</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="{%url 'Beezfees:payment_plan'%}">Payment Plan Registration</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>-->
+
+                    {% for group in user.groups.all %}
+                    {% if group.name == 'technical' %}
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Users</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                 <a href="{%url 'admin:index'%}">
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                   Add Users
+                                </li></a>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {%endif%}
+                    {%endfor%}
+                   
+                    <div class="menu-button-container menu-profile d-none d-md-block ">
+                        <button class="mdc-button mdc-menu-button">
+                                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon text-light" aria-hidden="true">payment</i>
+                                 <div class="text-light">Logout</div>
+                        </button>
+                        <div class="mdc-menu mdc-menu-surface" tabindex="-1">
+                            <ul class="mdc-list" role="menu" aria-orientation="vertical" >
+    
+                                <li class="mdc-list-item" role="menuitem" title="">
+                                    <a href="{%url 'Beezfees:logout'%}">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>                
+
+        
+        </nav>
+    </div>
+</aside>
+

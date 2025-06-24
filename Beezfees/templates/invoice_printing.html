@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block pageContent %}
+
+{% for invoice in invoices %}
+{% for detail in invoice.details %}
+</div>
+
+<div id="outprint">
+    <div class="company-logo">
+       <center> <img src="{% static 'Wisedell.png' %}" alt="Company Logo">
+    </div>
+    <!-- Display invoice header information -->
+    <div class="school-name">{{ invoice.company.col_co_name }}</br>
+    <div class="school-name">{{ invoice.company.col_co_email_add }}</br>
+    <div class="school-name">{{ invoice.company.col_co_telephone }}</br>
+    <div class="school-name">{{ invoice.company.col_co_phy_address }}</br>
+    </div>
+    <hr>
+    <!-- Display customer information -->
+    <div class="details">{{ invoice.customer.cust_no }}</br>
+        <div class="details">{{ invoice.customer.first_name }} {{ invoice.customer.last_name }}</br>
+        <div class="details">{{ invoice.customer.email }}</br>
+        <div class="details">{{ invoice.customer.address }}</br>
+        <div class="details">{{ invoice.customer.phone }}</br>
+    </div>
+    
+    <div class="customer-details">Invoice Number: {{ deteail.col_inv_no }}</br>
+    <div class="customer-details">Invoice Date: {{ detail.col_inv_date }}</br>
+    <div class="customer-details">Due Date: {{ detail.col_due_date }}</div>
+    
+    <hr>
+    
+    <table>
+        <colgroup>
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+            <col width="10%">
+        </colgroup>
+        <thead>
+            <div class="d-flex w-100 align-items-end border-bottom">
+            <tr class="mdc-data-table__header-row">
+                <th class="text-left py-1">Quantity</th>
+                <th class="text-left py-1">Description</th>
+                <th class="text-left py-1">Unit Price</th>
+                <th class="text-left py-1">Amount</th>
+            </tr>
+            <div class="d-flex w-100 align-items-end border-bottom">
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td class="px-2 py-1 text-left">{{ detail.col_quantity }}</td>
+                <td class="px-2 py-1 text-left">{{ detail.col_revenue_name }}</td>
+                <td class="px-2 py-1 text-left">{{ detail.col_fee_amount }}</td>
+                <td class="px-2 py-1 text-left">{{ detail.col_line_total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="total">TOTAL: {{ invoice.header.col_inv_total }}</br>
+        {% endfor %}
+        
+    </div>
+</div>
+<button class="invoice_print">Print Invoice</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+<script>
+    $(function() {
+        $('#invoice_print').click(function() {
+            var head = $('head').clone();
+            var content = $('#GFG').clone();
+            var el = $("<div>");
+            head.append('<style>body{background-color:unset !important}</style>');
+            el.append(head);
+            el.find('title').text("Invoice - Print View");
+            el.append(content);
+            start_loader();
+            var nw = window.open('', '_blank', "width=800,height=800,left=300,top=200");
+            nw.document.write(el.html());
+            nw.document.close();
+            setTimeout(() => {
+                nw.print();
+                setTimeout(() => {
+                    nw.close();
+                    end_loader();
+                }, 100);
+            }, 150);
+        });
+
+    });
+</script>
+
+{% endblock %}

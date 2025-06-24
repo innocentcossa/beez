@@ -1,0 +1,178 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block pageContent %}
+
+<style>
+    
+    .mdc-data-table {
+        width: 110%;
+        border-collapse: collapse;
+    }
+    .fees_statement {
+        text-align: left;
+        font-weight: light;
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+    @media print {
+        #print_statements,
+        #generate_pdf {
+          display: none;
+        }
+      }
+
+    .company-name {
+        text-align: center;
+        font-weight: bold;
+        font-size: 35px;
+        margin-bottom: 20px;
+    }
+    .name {
+        text-align: left;
+        font-weight: bold;
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+
+    .mdc-data-table__header-row {
+        background-color: #eceff1;
+    }
+
+    .mdc-data-table__row:nth-child(even) {
+        line-height: 0.0001;
+        height:0.1px;
+    }
+
+    .mdc-data-table__row:nth-child(odd) {
+        line-height: 0.0001;
+        height:0.3px;
+    }
+
+    .mdc-data-table__row:hover {
+        background-color: #e0e0e0;
+    }
+    .company-logo {
+        display: flex;
+        text-align: center
+        margin-bottom: 20px;
+    }
+
+    .company-logo img {
+        max-width: 150px;
+        height: auto;
+    }
+   
+</style>
+
+<div class="mdc-card mdc-card--outlined mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-sm- mdc-layout-grid__cell--span-md-8 mt-5" id="GFG">
+    <div class="mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-sm-10 mdc-layout-grid__cell--span-md-12 border-b">
+        <div id="outprint">
+            <div class="company-logo">
+                <center> <img src="{% static 'Wisedell.png' %}" alt="Company Logo">
+        
+            <div class="company-name">{{ company.col_co_name }}</br>
+            <div class="mdc-typography--body2 mdc-layout-grid__cell--align-center">{{ company.col_co_phy_address }}</div>
+            <div class="mdc-typography--body2 mdc-layout-grid__cell--align-center"><i>{{ company.col_co_email_add }}</i></div>
+            <div class="mdc-typography--body2 mdc-layout-grid__cell--align-center">{{ company.col_co_mobile_no }}</div>
+
+            <hr>
+        </div>
+
+    </div>
+            <div class="mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-sm-12 mdc-layout-grid__cell--span-md-2">
+                <div class="fees_statement">Fees Statement</div>
+                <div class="mdc-typography--body2">Customer Details</div>
+                <div class="name">{{ col_cust_no }} - {{ customer_last_name }} {{ customer_first_name }}</div>
+            </div>
+   
+    <div class="mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-sm-12 mdc-layout-grid__cell--span-md-2">
+        <div class="mdc-typography--body2">Date</div>
+        <div class="mdc-typography--subtitle1">{{dat }}</div>
+    </div>
+</div>
+
+<table>
+    <colgroup>
+        <col width="5%">
+        <col width="6%">
+        <col width="6%">
+        <col width="6%">
+        <col width="6%"> 
+    </colgroup>
+<thead>
+    <tr class="mdc-data-table__header-row">
+        <th class="text-left py-1">Transaction Date</th>
+        <th class="text-left py-1">Description</th>
+        <th class="text-right py-1" >Dr</th>
+        <th class="text-right py-1">Cr</th>
+        <th class="text-right py-1">Balance</th>
+    </tr>
+</thead>
+<tbody>
+    {% for fees_statement in fees_statements %}
+        {% if fees_statement.dr_amount != 0 or fees_statement.cr_amount != 0 or fees_statement.running_balance != 0 %}
+            <tr>
+                <td class="px-2 py-1 text-left">{{ fees_statement.transaction_date }}</td>
+                <td class="px-2 py-1 text-left">{{ fees_statement.description }}</td>
+                {% if fees_statement.dr_amount != 0 %}
+                    <td class="px-2 py-1 text-right">{{ fees_statement.dr_amount }}</td>
+                {% else %}
+                    <td class="px-2 py-1 text-center"></td>
+                {% endif %}
+                {% if fees_statement.cr_amount != 0 %}
+                    <td class="px-2 py-1 text-right">{{fees_statement.cr_amount }}</td>
+                {% else %}
+                    <td class="px-2 py-1 text-right"></td>
+                {% endif %}
+                {% if fees_statement.running_balance != 0 %}
+                    <td class="px-2 py-1 text-right">{{ fees_statement.running_balance }}</td>
+                {% else %}
+                    <td class="px-2 py-1 text-right"></td>
+                {% endif %}
+            </tr>
+        {% endif %}
+    {% endfor %}
+</tbody>
+</table>
+
+<div/>
+
+<button id="print_statements">Print Statement</button>
+<button id="generate_pdf">Generate PDF</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#print_statements').click(function() {
+      var head = $('head').clone();
+      var content = $('#GFG').clone();
+      var el = $("<div>");
+      head.append('<style>body{background-color:unset !important}</style>');
+      el.append(head);
+      el.find('title').text("Fees Statement - Print View");
+      el.append(content);
+      start_loader();
+      var nw = window.open('', '_blank', "width=800,height=800,left=300,top=200");
+      nw.document.write(el.html());
+      nw.document.close();
+      setTimeout(() => {
+        nw.print();
+        setTimeout(() => {
+          nw.close();
+          end_loader();
+        }, 100);
+      }, 150);
+    });
+
+    $('#generate_pdf').click(function() {
+      var element = document.getElementById("GFG");
+      html2pdf()
+        .from(element)
+        .save('fees_statement.pdf');
+    });
+  });
+</script>
+
+{% endblock %}

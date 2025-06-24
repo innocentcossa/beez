@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block pageContent %}
+
+</div>
+<div>
+</div>
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Customer List</h4>
+
+            <div class="text-start">
+                
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example">
+                <colgroup>
+                    <col width="5%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-left py-1">No.</th>
+                        <th class="text-left py-1">Customer Number</th>
+                        <th class="text-left py-1">First Name</th>
+                        <th class="text-left py-1">Last Name</th>
+                        <th class="text-left py-1">Class</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customer_list%}
+        
+                    <tr>  <td class="px-2 py-1 text-left">{{forloop.counter}}</td>
+                        <td class="px-2 py-1 text-left">{{customer.col_cust_no}}</td>
+                        <td class="px-2 py-1 text-left">{{customer.col_firstname}}</td>
+                        <td class="px-2 py-1 text-left">{{customer.col_lastname}}</td>
+                        <td class="px-2 py-1 text-center">{{customer.col_grade}}</td>
+                    </div>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+            {% endblock pageContent %}
+        
+    

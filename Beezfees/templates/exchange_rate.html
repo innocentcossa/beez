@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block pageContent %}
+
+</div>
+<div class="col-8">
+  <div class="form-group mb-3">
+  </div>
+</div>
+
+<div class="mdc-layout-grid__inner">
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+      <h4 class="card-title mb-0">Exchange Rates</h4>  
+      <div class="text-start">
+    </div>  
+  </div>          
+    <div class="pos-dropdown__dropdown-box dropdown-box mt-10 absolute top-0 right-0 z-20">
+      <div class="dropdown-box__content box p-2">
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="container-fluid">
+    <form action="{% url 'Beezfees:exchange_rates' %}" id="form" method="post">
+        {% csrf_token %}
+      <input type="hidden" name="id">
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group mb-3">
+            <label for="col_base_curr " class="control-label">Base Currency</label>
+            <select type="text" name="col_base_curr" id="col_base_curr" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+              {%for currency in currency%}
+              <option value="{{currency.col_curr_code}}">
+                {{currency.col_curr_name}}
+              </option>
+              {%endfor%}
+            </select>
+          </div>
+        </div>
+        <!-- <div class="col-4">
+          <div class="form-group mb-3">
+            <label for="col_base_curr_shortcode" class="control-label">Base Currency Code</label>
+            <input type="text" name="col_base_curr_shortcode" id="col_base_curr_shortcode" placeholder="" class="form-control form-control-sm rounded-0" value="">
+          </div>
+        </div> -->
+
+        <div class="col-2">
+          <div class="form-group mb-3">
+            <label for="col_base_amount" class="control-label">Base Currency Value</label>
+            <input type="text" name="col_base_amount" id="col_base_amount" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="form-group mb-3">
+            <label for="col_destination_curr" class="control-label">Destination Currency </label>
+            <select type="text" name="col_destination_curr" id="col_destination_curr" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+              {%for currency in currency%}
+              <option value="{{currency.col_curr_code}}">
+                {{currency.col_curr_name}}
+              </option>
+              {%endfor%}
+            </select>
+          </div>
+        </div>
+
+        <!-- <div class="col-4">
+          <div class="form-group mb-3">
+            <label for="col_dest_curr_shortcode" class="control-label">Destination Currency Code</label>
+            <input type="text" name="col_dest_curr_shortcode" id="col_dest_curr_shortcode" placeholder="" class="form-control form-control-sm rounded-0" value="" >
+          </div>
+        </div>
+                  -->
+        <div class="col 2">
+          <div class="form-group mb-3">
+            <label for="col_dest_amount" class="control-label">Destination Currency Value</label>
+            <input type="number" name="col_dest_amount" id="col_dest_amount" class="form-control form-control-sm rounded-0" value="" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+      <div class="col-4">
+        <div class="form-group mb-3">
+          <label for="col_effective_date" class="control-label">Effective  date</label>
+          <input type="date" name="col_effective_date" id="col_effective_date" placeholder=" " class="form-control form-control-sm rounded-0" value=" " required>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="form-group mb-3">
+          <label for="col_exchange_name" class="control-label">Exchange Name</label>
+          <input type="text" name="col_exchange_name" id="col_exchange_name" placeholder=" " class="form-control form-control-sm rounded-0" value=" " required>
+        </div>
+        </div>
+
+      <div class="col-4">
+        <div class="form-group mb-3">
+          <label for="col_expiry_date" class="control-label">Expiry  date</label>
+          <input type="date" name="col_expiry_date" id="col_expiry_date" placeholder=" " class="form-control form-control-sm rounded-0" value=" " required>
+        </div>
+
+        
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+      
+    </form>
+
+
+
+    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+      <div class="mdc-card py-2">
+          <div class="d-flex justify-content-between align-items-center">
+              <h4 class="card-title mb-0">Exchange Rate</h4>
+  
+              <div class="text-start">
+                  <button class="btn btn-primary bg-gradient btn-sm rounded-0" id="create_new"><i class="mdi mdi-plus"></i><span> Add New</span></button>
+              </div>
+      
+          </div>
+      </div>
+  </div>
+  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+      <div class="mdc-card">
+          <div class="table-responsive">
+              <table class="table table-striped table-bordered" id="example">
+                  <colgroup>
+                     <col width="5%">
+                      <col width="20%">
+                      <col width="40%">
+                      <col width="20%">
+                      <col width="20%">
+                      <col width="40%">
+                      <col width="20%">
+                      <col width="20%">
+  
+                  </colgroup>
+                  <thead>
+                      <tr>
+                        <th class="text-left py-1">#</th>
+                          <th class="text-left py-1">Name</th>
+                          <th class="text-left py-1">Base Currency</th>
+                          <th class="text-right py-1">Base Amount</th>
+                          <th class="text-left py-1">Destination Currency</th>
+                          <th class="text-right py-1">Destination Amount</th>
+                          <th class="text-left py-1">Effective date</th>
+                          <th class="text-left py-1">Expiry date</th>
+                          <th class="text-left py-1">Active</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for exchange_rates in exchange_rates %}
+                      <tr><td class="px-2 py-1 text-left">{{exchange_rates.col_exchange_id}}</td>
+                           <td class="px-2 py-1 text-left">{{exchange_rates.col_exchange_name}}</td>
+                          <td class="px-2 py-1 text-left">{{exchange_rates.col_base_curr}}</td>
+                          <td class="px-2 py-1 text-right">{{exchange_rates.col_base_amount}}</td>
+                          <td class="px-2 py-1 text-left">{{exchange_rates.col_destination_curr}}</td>
+                          <td class="px-2 py-1 text-right">{{exchange_rates.col_dest_amount}}</td>
+                          <td class="px-2 py-1 text-left">{{exchange_rates.col_effective_date}}</td>
+                          <td class="px-2 py-1 text-left">{{exchange_rates.col_expiry_date}}</td>
+                          <td class="px-2 py-1 text-left">{{exchange_rates.col_active}}</td>
+  
+                          </td>
+                          
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+  {% endblock pageContent %} {% block ScriptBlock %}
+  <script>
+      
+  {% endblock ScriptBlock %}
+

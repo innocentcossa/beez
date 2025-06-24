@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block pageContent %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@11.0.0/dist/material-components-web.min.css">
+</div>
+<div class="col-8">
+  <div class="form-group mb-3">
+  </div>
+</div>
+
+<div class="mdc-layout-grid__inner">
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+      <h4 class="card-title mb-0">Cost Centres</h4>  
+    
+  </div>          
+    <div class="pos-dropdown__dropdown-box dropdown-box mt-10 absolute top-0 right-0 z-20">
+      <div class="dropdown-box__content box p-2">
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="container-fluid">
+    <form action="{% url 'Beezfees:cost_centres' %}" id="form" method="post">
+        {% csrf_token %}
+      <input type="hidden" name="id">
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group mb-3">
+            <label for="col_centre_code " class="control-label">Center ID</label>
+    <input type="text" name="col_centre_code " id="col_centre_code "placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group mb-3">
+            <label for="  col_centre_name" class="control-label">Centre Name</label>
+            <input type="text" name="col_centre_name" id="col_centre_name" placeholder="" class="form-control form-control-sm rounded-0" value=" " required>
+          </div>
+        </div>
+
+
+          <div class="form-group mb-3">
+              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="button" class="btn btn-secondary">Cancel</button>
+          </div>
+
+      <script>
+        $(function() {
+            $('#form').submit(function(e) {
+                e.preventDefault();
+                var _this = $(this)
+                $('.err-msg').remove();
+                var el = $('<div>')
+                el.addClass("alert alert-danger err-msg")
+                el.hide()
+                if (_this[0].checkValidity() == false) {
+                    _this[0].reportValidity();
+                    return false;
+                }
+                start_loader();
+                $.ajax({
+                    headers: {
+                        "X-CSRFToken": '{{csrf_token}}'
+                    },
+                    url: "{% url 'Beezfees:cost_centres' %}",
+                    data: new FormData($(this)[0]),
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    method: 'POST',
+                    type: 'POST',
+                    dataType: 'json',
+                    error: err => {
+                        console.log(err)
+                        end_loader();
+                    },
+                    success: function(resp) {
+                        if (typeof resp == 'object' && resp.status == 'success') {
+                            el.removeClass("alert alert-danger err-msg")
+                            location.reload()
+                        } else if (resp.status == 'failed' && !!resp.msg) {
+                            el.text(resp.msg)
+                        } else {
+                            el.text("An error occured", 'error');
+                            end_loader();
+                            console.err(resp)
+                        }
+                        _this.prepend(el)
+                        el.show('slow')
+                        $("html, body, .modal").scrollTop(0);
+                        end_loader()
+                    }
+                })
+            })
+        })
+</script>
+
+
+        
+          
+          </form>
+
+        </div>
+        <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+          <div class="mdc-card">
+              <div class="table-responsive">
+                  <table class="table table-striped table-bordered" id="example">
+                      <colgroup>
+                          <col width="20%">
+                          <col width="40%">
+                      </colgroup>
+                      <thead>
+                          <tr>
+                              <th class="text-center py-1">Center Code</th>
+                              <th class="text-center py-1">Center Name</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                            {% for cost_center in cost_centre_list %}
+                            <tr>
+                                <td class="px-2 py-1 text-center">{{ cost_center.col_centre_code }}</td>
+                                <td class="px-2 py-1 text-center">{{ cost_center.col_centre_name }}</td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+ {% endblock pageContent %}

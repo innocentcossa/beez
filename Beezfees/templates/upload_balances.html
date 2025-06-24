@@ -1,0 +1,55 @@
+{% extends "base.html" %}  {% block pageContent %}
+
+
+
+
+    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+        <div class="mdc-card py-2">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="card-title mb-0">Upload Opening Balances</h4>
+                <div class="text-start">
+                    <a class="btn btn-primary bg-gradient btn-sm rounded-0" href="{% url 'Beezfees:download_balance_upload_file' %}">
+                        <span>Download Sample Excel Template</span>
+                    </a>
+
+                    <a class="btn btn-primary bg-gradient btn-sm rounded-0" href="{% url 'Beezfees:save_invoices' %}">
+                        <span>Invoice</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-8">
+        <div class="mdc-card py-2">
+            <form action="{% url 'Beezfees:upload_balances' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="d-flex justify-content-between">
+                    <div class="col-lg-6 col-md-5 col-sm-12">
+                        <div class="form-group mb-3">
+                            <!-- Add input fields or other content here if needed -->
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="d-flex justify-content-between">
+                    <div class="col-4">
+                        <div class="lh-1">
+                            <div class="form-group mb-3">
+                                <label for="file">Upload Excel File:</label>
+                                <input type="file" name="file" id="file" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lh-1">
+                        <button type="submit" class="btn btn-primary bg-gradient btn-sm rounded-0">
+                            <span>Submit</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+    {% endblock pageContent %}

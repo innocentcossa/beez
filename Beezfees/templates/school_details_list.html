@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block pageContent %}
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@11.0.0/dist/material-components-web.min.css">
+
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">School Details </h4>
+
+            <div class="text-start">
+                <button class="btn btn-primary bg-gradient btn-sm rounded-0" id="create_new"><i class="mdi mdi-plus"></i><span> Add New</span></button>
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example">
+                <colgroup>
+                    <col width="20%">
+                    <col width="40%">
+                    <col width="20%">
+                    <col width="20%">
+                    
+                    
+
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-left py-1">School Code</th>
+                        <th class="text-left py-1">School Name</th>
+                        <th class="text-left py-1">School Shortname</th>
+                        <th class="text-left py-1">School Physical adress</th>
+                        
+                
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for school_detail in Details %}
+                    <tr>
+                        <td class="px-2 py-1 text-left">{{ school_detail.col_co_code }}</td>
+                        <td class="px-2 py-1 text-left">{{ school_detail.col_co_name }}</td>
+                        <td class="px-2 py-1 text-left">{{ school_detail.col_co_shortname }}</td>
+                        <td class="px-2 py-1 text-left">{{ school_detail.col_co_phy_address }}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock pageContent %} {% block ScriptBlock %}
+<script>
+    
+{% endblock ScriptBlock %}

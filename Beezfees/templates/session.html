@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block pageContent %}
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+  <div class="mdc-card py-2">
+      <div class="d-flex justify-content-between align-items-center">
+          <h4 class="card-title mb-0">Session</h4>
+           <a class="btn btn-primary bg-gradient btn-sm rounded-0" href="{% url 'Beezfees:ordinance' %}"><span>Ordinance</span></a>
+          <div class="text-start"> <a class="btn btn-primary bg-gradient btn-sm rounded-0" href="{% url 'Beezfees:add_school' %}"><span>School Details</span></a>
+
+          </div>
+          
+  
+          </div>
+      </div>
+      </div>
+  </div>
+
+  <div class="container-fluid">
+    <form action="{% url 'Beezfees:session' %}" id="form" method="post">
+        {% csrf_token %}
+      <input type="hidden" name="id">
+      <div class="row">
+        <div class="col-4">
+          <label for="col_session_year" class="control-label">Session Year</label>
+          <input type="year" name="col_session_year" id="col_session_year" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group mb-3">
+                <label for="col_session_code" class="control-label">Session Code</label>
+                <input type="text" name="col_session_code" id="col_session_code" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group mb-3">
+                <label for="col_session_name" class="control-label">Session name</label>
+                <input type="text" name="col_session_name" id="col_session_name" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+            </div>
+          </div>
+
+
+        
+
+
+        <div class="col-4">
+          <div class="form-group mb-3">
+            <label for="col_start_date" class="control-label">Start date</label>
+            <input type="date" name="col_start_date" id="col_start_date" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+          </div>
+        </div>
+        
+        
+        <div class="col-4">
+          <div class="form-group mb-3">
+            <label for="col_end_date" class="control-label">End date</label>
+            <input type="date" name="col_end_date" id="col_end_date" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+          </div>
+        </div>
+
+          </div>
+        </div>
+        
+            
+                     
+
+                    <div class="form-group mb-3">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Session List</h4>
+        </div>
+    </div>
+</div>
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example">
+                <colgroup>
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center py-1">Session code</th>
+                        <th class="text-left py-1">Session Name</th>
+                        <th class="text-left py-1">Session Year</th>
+                        <th class="text-left py-1">Start date</th>
+                        <th class="text-left py-1">End date</th>
+                        <th class="text-left py-1">Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for session_list in session_list%}
+                    <tr>
+                        <td class="px-2 py-1 text-center">
+                            <a href="#" onclick="populateSessionInfo('{{ session_list.col_session_code }}', '{{ session_list.col_session_name }}', '{{ session_list.col_session_year }}','{{ session_list.col_start_date }}','{{ session_list.col_end_date }}')">
+                                {{ session_list.col_session_code }}
+                            </a>
+                        </td>
+
+                        <td class="px-2 py-1 text-center">{{ session_list.col_session_name }}</td>
+                        <td class="px-2 py-1 text-left">{{ session_list.col_session_year }}</td>
+                        <td class="px-2 py-1 text-left">{{ session_list.col_start_date }}</td>
+                        <td class="px-2 py-1 text-left">{{ session_list.col_end_date }}</td>
+                        <td class="px-2 py-1 text-center">
+                            {% if session_list.col_active == 1 %}
+                                <span class="badge bg-primary rounded-pill px-3">Active</span>
+                            {% else %}
+                                <span class="badge bg-secondary rounded-pill px-3">Deactive</span>
+                            {% endif %}
+                        
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock pageContent %}
+{% block ScriptBlock %}
+<script>
+    function populateSessionInfo(snCo, sessnNam, sessionYr,sessionart,sessionend,sestatus) {
+        document.getElementById("col_session_code").value = snCo;
+        document.getElementById("col_session_name").value = sessnNam;
+        document.getElementById("col_session_year").value = sessionYr;
+        document.getElementById("col_start_date").value = sessionart;
+        document.getElementById("col_end_date").value = sessionend;
+        document.getElementById("col_active").value = sestatus;
+
+
+    }
+</script>
+{% endblock ScriptBlock %}

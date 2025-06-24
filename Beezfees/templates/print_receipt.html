@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block pageContent %}
+<style>
+    #uni_modal .modal-footer {
+        display: none;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    #outprint {
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .school-name {
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+    }
+
+    button#invoice_print {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button#invoice_print:hover {
+        background-color: #45a049;
+    }
+</style>
+</div>
+
+
+<div id="outprint">
+    <div class="school-name">{{ consolidated_invoice.header.col_co_name }}</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Invoice Number</th>
+                <th>Customer Number</th>
+                <th>Invoice Date</th>
+                <th>Invoice Total</th>
+                <th>Due Date</th>
+    
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ consolidated_invoice.header.col_rem_no }}</td>
+                <td>{{ consolidated_invoice.header.col_cust_no }}</td>
+                <td>{{ consolidated_invoice.header.col_rem_date }}</td>
+                <td>{{ consolidated_invoice.header.col_rem_amount }}</td>
+                <td>{{ consolidated_invoice.header.col_due_date }}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Fees Description</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Line Number</th>
+                <th>Revenue Name</th>
+                <th>Fee Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detail in consolidated_invoice.details %}
+            <tr>
+                <td>{{ detail.col_inv_line_no }}</td>
+                <td>{{ detail.col_revenue_code }}</td>
+                <td>{{ detail.col_fee_amount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+<!-- Print Invoice button -->
+<button id="invoice_print">Print Invoice</button>
+
+<script>
+    function printInvoice() {
+        var head = $('head').clone();
+        var p = $('#outprint').clone();
+        var el = $("<div>");
+        head.append('<style>body{background-color:unset !important}</style>');
+        el.append(head);
+        el.find('title').text("Invoice - Print View");
+        el.append(p);
+        start_loader();
+        var nw = window.open('', '_blank', "width=800,height=800,left=300,top=200");
+        nw.document.write(el.html());
+        nw.document.close();
+        nw.onload = function () {
+            nw.print();
+            nw.onafterprint = function () {
+                nw.close();
+                end_loader();
+            };
+        };
+    }
+
+    $(function () {
+        $('#invoice_print').click(function () {
+            printInvoice();
+        });
+    });
+</script>
+{% endblock pageContent %}

@@ -1,0 +1,228 @@
+
+{% extends "base.html" %}
+
+{% block pageContent %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@11.0.0/dist/material-components-web.min.css">
+
+
+    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-8">
+        <div class="mdc-card py-2">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="card-title mb-0">Edit Registration Status</h4>
+                <div class="text-start"> <a class="btn btn-primary bg-gradient btn-sm rounded-0" href="{% url 'Beezfees:upload_customer' %}"><span>Back</span></a>
+    
+                </div>
+        
+        
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-8">
+
+    <div class="container-fluid">
+        <form action="Beezfees:customers" id="form">
+            <div class="row">
+                <div class="col-4">
+                            <div class="form-group mb-3">
+                <label for="col_reg_id" class="control-label">Registration ID</label>
+                <input type="number" name="col_reg_id" id="col_reg_id" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+            </div>
+        </div>
+        
+        <div class="col-4">
+            <div class="form-group mb-3">
+<label for="col_cust_no" class="control-label">Customer number</label>
+<input type="text" name="col_cust_no" id="col_cust_no"placeholder="" class="form-control form-control-sm rounded-0" value=" " required>
+</div>
+</div>
+        
+    
+                <div class="col-4">
+                            <div class="form-group mb-3">
+                <label for="col_firstname" class="control-label">Firstname </label>
+                <input type="text" name="col_firstname" id="col_firstname"placeholder="" class="form-control form-control-sm rounded-0" value=" " required>
+            </div>
+        </div>
+    
+    
+                <div class="col-4">
+                    <div class="form-group mb-3">
+                        <label for="col_middle_name" class="control-label">Middlename</label>
+                        <input type="text" name="col_middle_name" id="col_middle_name" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+                    </div>
+                </div>
+                <div class="col-4">
+                         <div class="form-group mb-3">
+                <label for="col_lastname" class="control-label">Lastname</label>
+                <input type="text" name="col_lastname" id="col_lastname" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+            </div>
+                </div>
+                 
+                <div class="col-4">
+                            <div class="form-group mb-3">
+                <label for="col_sex" class="control-label"> sex</label>
+                <input type="number" name="col_sex" id="col_sex" class="form-control form-control-sm rounded-0" value="" required>
+            </div>
+    
+                </div>
+    
+    
+            
+                <div class="col-4">
+                            <div class="form-group mb-3">
+                <label for="col_phys_add" class="control-label">Pyhsical Address</label>
+                <input type="textarea" name="col_phys_add" id="col_phys_add" placeholder=" " class="form-control form-control-sm rounded-0" value="" required>
+            </div>
+    
+                </div>
+                <div class="col-4">
+                            <div class="form-group mb-3">
+                <label for="col_co_mailadd" class="control-label">Mailing Address</label>
+                <input type="text" name="col_co_mailadd" id="col_co_mailadd" placeholder=" " class="form-control form-control-sm rounded-0" value="" required>
+            </div>
+
+        </div>
+        <div class="col-4">
+                    <div class="form-group mb-3">
+        <label for="col_city" class="control-label">City</label>
+        <input type="text" name="col_city" id="col_city" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+    </div>
+    
+                </div>
+                <div class="col-4">
+                            <div class="form-group mb-3">
+                <label for="col_co_telephone" class="control-label">Telephone</label>
+                <input type="text" name="col_co_telephone" id="col_co_telephone" placeholder="eg: 26377777777" class="form-control form-control-sm rounded-0" value="" required>
+            </div>
+    
+                </div>
+                <div class="col-4">
+                            <div class="form-group mb-3">
+                <label for="col_mobi_num" class="control-label">Mobile No</label>
+                <input type="text" name="col_mobi_num" id="col_mobi_num" placeholder="Mobile No" class="form-control form-control-sm rounded-0" value=""required>
+            </div>
+    
+                </div>
+                <div class="col-4">
+                            <div class="form-group mb-3">
+                <label for="col_email" class="control-label">Email</label>
+                <input type="email" name="col_email" id="col_email" placeholder="Email" class="form-control form-control-sm rounded-0" value=""required >
+            </div>
+
+        </div>
+                <div class="col-4">
+                            <div class="form-group mb-3">
+                <label for="col_grade" class="control-label">Grade</label>
+                <input type="text" name="col_grade" id="col_grade" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+            </div>
+
+            <div class="col-12">
+                <div class="form-group mb-3">
+                    
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+    
+    
+
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+        </form>
+        </div>
+        <script>
+            $(function() {
+                $('#form').submit(function(e) {
+                    e.preventDefault();
+                    var _this = $(this)
+                    $('.err-msg').remove();
+                    var el = $('<div>')
+                    el.addClass("alert alert-danger err-msg")
+                    el.hide()
+                    if (_this[0].checkValidity() == false) {
+                        _this[0].reportValidity();
+                        return false;
+                    }
+                    start_loader();
+                    $.ajax({
+                        headers: {
+                            "X-CSRFToken": '{{csrf_token}}'
+                        },
+                        url: "{% url 'Beezfees:single_customer' %}",
+                        data: new FormData($(this)[0]),
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        method: 'POST',
+                        type: 'POST',
+                        dataType: 'json',
+                        error: err => {
+                            console.log(err)
+                            end_loader();
+                        },
+                        success: function(resp) {
+                            if (typeof resp == 'object' && resp.status == 'success') {
+                                el.removeClass("alert alert-danger err-msg")
+                                location.reload()
+                            } else if (resp.status == 'failed' && !!resp.msg) {
+                                el.text(resp.msg)
+                            } else {
+                                el.text("An error occured", 'error');
+                                end_loader();
+                                console.err(resp)
+                            }
+                            _this.prepend(el)
+                            el.show('slow')
+                            $("html, body, .modal").scrollTop(0);
+                            end_loader()
+                        }
+                    })
+                })
+            })
+</script>
+
+</form>
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example">
+                <colgroup>
+                    <col width="20%">
+                    <col width="40%">
+                    <col width="20%">
+                    <col width="20%">
+            
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-left py-1">Customer Number</th>
+                        <th class="text-left py-1">First Name</th>
+                        <th class="text-left py-1">Last Name</th>
+                        <th class="text-left py-1">Class</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customer_list%}
+        
+                    <tr>
+                        <td class="px-2 py-1 text-left">{{customer.col_cust_no}}</td>
+                        <td class="px-2 py-1 text-left">{{ customer.col_firstname}}</td>
+                        <td class="px-2 py-1 text-left">{{customer.col_lastname}}</td>
+                        <td class="px-2 py-1 text-center">{{customer.col_grade}}</td>
+                    </div>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+{% endblock pageContent %}

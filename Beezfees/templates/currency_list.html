@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block pageContent %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@11.0.0/dist/material-components-web.min.css">
+
+
+
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Currency List</h4>
+
+            <div class="text-start">
+        
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example">
+                <colgroup>
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center py-1">Currency code</th>
+                        <th class="text-left py-1">Currency Name</th>
+                        <th class="text-left py-1">Currency  Shortcode</th>
+                        <th class="text-left py-1">Currency Symbol</th>
+            
+                
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for currency in currency_list%}
+
+                    <tr>
+                        <td class="px-2 py-1 text-center">{{currency.col_curr_code}}</td>
+                        <td class="px-2 py-1 text-left">{{ currency.col_curr_name}}</td>
+                        <td class="px-2 py-1 text-left">{{currency.col_curr_shortcode}}</td>
+                        <td class="px-2 py-1 text-left">{{currency.col_curr_symbol}}</td>
+                    </div>
+                    
+                        
+                    </tr>
+                   {%endfor%} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock pageContent %}

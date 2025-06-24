@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block pageContent %}
+{% if perms.admin%}
+{% if perms.director%} 
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+  <div class="mdc-card py-2">
+      <div class="d-flex justify-content-between align-items-center">
+          <h4 class="card-title mb-0">Invoice Adjustments</h4>
+           <a class="btn btn-primary bg-gradient btn-sm rounded-0" href="{% url 'Beezfees:save_invoice' %}"><span>Invoicing</span></a>
+         
+          </div>
+          
+  
+          </div>
+      </div>
+      </div>
+  </div>
+
+    <div class="container-fluid">
+      <form action="{% url 'Beezfees:adjustments' %}"  method="post">
+          {% csrf_token %}
+          <input type="hidden" name="id">
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group mb-3">
+              <label for="col_cust_no" class="control-label">Customer number</label>
+              <input type="text" name="col_cust_no" id="col_cust_no" placeholder="" class="form-control form-control-sm rounded-0" value="" readonly>
+            </div>
+          </div>
+        
+          <div class="col-4">
+            <div class="form-group mb-3">
+              <label for="name" class="control-label">Name</label>
+              <input type="text" name="name" id="name" placeholder="" class="form-control form-control-sm rounded-0" value=" " readonly>
+            </div>
+          </div>
+     
+            <div class="col-4">
+              <div class="form-group mb-3">
+                <label for="col_acc_no" class="control-label">Customer Account</label>
+                <input type="text" name="col_acc_no" id="col_acc_no" placeholder="" class="form-control form-control-sm rounded-0" value="" readonly>
+              </div>
+            </div>
+        
+
+          <div class="col-4">
+            <div class="form-group mb-3">
+              <label for="col_inv_no" class="control-label">Invoice Number</label>
+              <input type="text" name="col_inv_no" id="col_inv_no" placeholder="" class="form-control form-control-sm rounded-0" value=" " readonly>
+            </div>
+          </div>
+             
+  
+          <div class="col-4">
+            <div class="form-group mb-3">
+              <label for="col_inv_total" class="control-label">Invoiced Amount</label>
+              <input type="text" name="col_inv_total" id="col_inv_total" placeholder="" class="form-control form-control-sm rounded-0" value=" " readonly>
+            </div>
+          </div>
+        
+  
+          
+
+          <div class="col-4">
+            <div class="form-group mb-3">
+              <label for="col_inv_total" class="control-label">Adjustment Amount</label>
+              <input type="decimal" name="col_inv_total" id="col_inv_total" placeholder="" class="form-control form-control-sm rounded-0" value="" required>
+            </div>
+          </div>
+          <div class="col-4">
+          </div>
+        </div>
+    
+        <div class="col-4">
+          <div class="form-group mb-3">
+            <label for="action" class="control-label">Action</label>
+            <select name="action" id="action" class="form-control form-control-sm rounded-0" required>
+              <option value="">Select an action</option>
+              <option value=1>Top Up</option>
+              <option value=2>Deduction</option>
+            </select>
+          </div>
+        </div>
+          
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary">Cancel</button>
+      </form>
+  
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Invoiced Customer List</h4>
+
+
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example">
+              <colgroup>
+                <col width="5%">
+                <col width="15%">
+                <col width="15%">
+                <col width="15%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="15%">
+            </colgroup>
+            <thead>
+                <tr>
+                  <!--<th class="text-left py-1">No.</th>-->
+                  <th class="text-left py-1">Invoice number</th>
+                   
+                    <th class="text-left py-1">Name</th>
+                    <th class="text-left py-1">Customer number</th>
+                    <th class="text-left py-1"> Account</th>
+                    <th class="text-left py-1"> Grade</th>
+                    <th class="text-left py-1">Currency</th>
+                    <th class="text-right py-1">Invoice Total</th>
+                  
+                    <th class="text-left py-1">Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for invoice in invoice %}
+                <!--<td class="px-1 py-1 text-left">{{ forloop.counter }}</td>-->
+                <td class="px-2 py-1 text-center">
+                  <a href="#" onclick="populateCustomerInfo('{{invoice.customer_number}}','{{ invoice.invoice_number}}', '{{invoice.account}}', '{{ invoice.invoice_total }}','{{invoice.name}}')">
+                      {{invoice.invoice_number }}
+                  </a>
+              </td>
+              
+              
+              <td class="px-1 py-1 text-left">{{invoice.name}}</td>
+             
+              <td class="px-1 py-1 text-left">{{invoice.account}}</td>                                    
+             
+              <td class="px-1 py-1 text-left">{{invoice.account}}</td>
+              <td class="px-1 py-1 text-left">{{invoice.grade}}</td>
+              <td class="px-1 py-1 text-left">{{invoice.currency}}</td>
+              <td class="px-1 py-1 text-right">{{invoice.invoice_total}}</td>
+              <td class="px-1 py-1 text-left">{{invoice.due_date }}</td>
+              </tr>
+                  {% endfor %}
+          </tbody>
+        </table>
+        {% endif %}
+        {%endif%}
+    </div>
+</div>
+</div>
+{% endblock  %}
+ {% block ScriptBlock %}
+<script>
+    function populateCustomerInfo(custNo, invNo,accNo,invTotal,naMe) {
+      document.getElementById("col_cust_no").value = custNo;
+      document.getElementById("col_inv_no").value = invNo;
+      document.getElementById("col_acc_no").value = accNo;
+      document.getElementById("col_inv_total").value = invTotal;
+      document.getElementById("name").value = naMe;
+    }
+  </script>
+  {% endblock ScriptBlock %}

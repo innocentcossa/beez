@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block pageContent %}
+</div>
+<div class="col-8">
+  <div class="form-group mb-3">
+  </div>
+</div>
+
+<div class="mdc-layout-grid__inner">
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+      <div class="d-flex justify-content-between align-items-center">
+        <h4 class="card-title mb-0">Select Currency</h4>
+        <a class="btn btn-primary bg-gradient btn-sm rounded-0" href="{% url 'Beezfees:payment_methods' %}"><span>Payment methods</span></a>
+        <div class="text-start"> 
+          <a class="btn btn-primary bg-gradient btn-sm rounded-0" href="{% url 'Beezfees:revenue_group' %}"><span>Revenue Group</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <form id="form" method="post" data-save-remittances-url="{% url 'Beezfees:save_remittances' %}" data-save-remit-url="{% url 'Beezfees:save_remit' %}">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-5">
+        <div class="form-group mb-3">
+          <label for="currency_code" class="control-label">Currency Code</label>
+          <select name="currency_code" id="currency_code" class="form-control form-control-sm rounded-0" required>
+            <option value="" disabled selected>Select Currency</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-group mb-3">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">Proceed</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock pageContent %}
+
+{% block ScriptBlock %}
+<script>
+  $(document).ready(function() {
+    // AJAX code to fetch currency codes...
+    $.ajax({
+      url: '/fetch_cur/',
+      type: 'GET',
+      dataType: 'json',
+      success: function(data) {
+        var select = document.getElementById('currency_code');
+        data.forEach(function(item) {
+          var option = document.createElement('option');
+          option.value = item;
+          option.text = item;
+          select.appendChild(option);
+        });
+      },
+      error: function() {
+        console.log('Error occurred while fetching currency codes.');
+      }
+    });
+  });
+</script>
+{% endblock ScriptBlock %}
+

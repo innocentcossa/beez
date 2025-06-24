@@ -1,0 +1,3 @@
+DJANGO_SECURE_SSL_REDIRECT=True
+
+SECRET_KEY = 'dytrufjandtruxilyukk,kgo-insefabsewqegwqhrjdu7.pf9[0rsssskofrlYRWANGRRYEFEWWRSDSQEWTNYKTIOYSZZA4cure-2m^*t#56uqml_3wln(w+^mb&lewf!p#d-$fq0o)vnz4a7-4ca6'

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block pageContent %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-components-web@11.0.0/dist/material-components-web.min.css">
+
+<form action="" id="form" class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+      <div class="mdc-card py-2">
+        <h4 class="card-title mb-0">Chart Of Accounts</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <form action="" id="form">
+    <input type="hidden" name="id" >
+     <div class="row">
+      <div class="col-4">
+        <div class="form-group mb-3">
+          <label for=" " class="control-label">Account Number</label>
+                  <input type="text" name="" id="" placeholder=" " class="form-control form-control-sm rounded-0" value="" required>
+              </div>
+          </div>
+      </div>
+
+
+          <div class="col-4">
+                   <div class="form-group mb-3">
+          <label for=" " class="control-label">Account Name</label>
+          <input type="text" name="" id="" placeholder=" " class="form-control form-control-sm rounded-0" value="" required>
+      </div>
+          </div>
+      </div>
+      
+
+           <div class="col-4">
+                      <div class="form-group mb-3">
+          <label for=" " class="control-label">Financial Statement</label>
+          <input type="text" name=" " id=" " placeholder=" " class="form-control form-control-sm rounded-0" value="" required>
+      </div>
+  
+         
+  <div class="col-12">
+      <div class="form-group mb-3">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary">Cancel</button>
+      </div>
+  </div>
+
+  </form>
+  </div>
+
+{% endblock pageContent %}

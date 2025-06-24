@@ -1,0 +1,71 @@
+{% extends "base.html" %} {% block pageContent %}
+
+
+
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card py-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h4 class="card-title mb-0">Revenue Objects list</h4>
+
+            <div class="text-start">
+                <button class="btn btn-primary bg-gradient btn-sm rounded-0" id="create_new"><i class="mdi mdi-plus"></i><span> Add New</span></button>
+            </div>
+    
+        </div>
+    </div>
+</div>
+<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+    <div class="mdc-card">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered" id="example">
+                <colgroup>
+                    
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="40%">
+                    <col width="20%">
+                    
+
+                </colgroup>
+                <thead>
+                    <tr>
+                        
+                        <th class="text-center py-1">Revenue Code</th>
+                        <th class="text-left py-1">Revenue Name</th>
+                        
+                
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for revenue in revenue_list %}
+
+                    <tr>
+                        <td class="px-2 py-1 text-center">
+                            <a href="#" onclick="populateSessionInfo('{{ revenue.col_revenue_code }}', '{{ revenue.col_revenue_name }}')">
+                                {{ revenue.col_revenue_code}}
+                            </a>
+                        </td>
+                        <td class="px-2 py-1 text-center">{{revenue.col_revenue_code }}</td>
+                        <td class="px-2 py-1 text-left">{{revenue.col_revenue_name }}</td>
+
+                        </td>
+            
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+           
+        </div>
+    </div>
+</div>
+{% endblock pageContent %} {% block ScriptBlock %}
+<script>
+    function populateOrdinanceInfo(revCode, revName) {
+        document.getElementById("col_revenue_code").value = revCode;
+        document.getElementById("col_revenue_name").value = revName;
+    
+      }
+    </script>
+    
+{% endblock ScriptBlock %}
